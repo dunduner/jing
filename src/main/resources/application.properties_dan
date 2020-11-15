@@ -1,0 +1,21 @@
+spring.application.name=study
+# 应用服务 WEB 访问端口
+server.port=8080
+server.tomcat.uri-encoding=UTF-8
+#项目访问名称，如果不配置直接访问bean就可以
+#server.servlet.context-path=/jing
+#Spring boot视图配置
+spring.mvc.view.prefix=/WEB-INF/jsp/
+spring.mvc.view.suffix=.jsp
+#静态文件访问配置
+spring.mvc.static-path-pattern=/static/**
+
+
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+#spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+#spring.datasource.url=jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+spring.datasource.url=jdbc:mysql://49.235.166.226:3521/test?useUnicode=true&characterEncoding=utf8
+spring.datasource.username=root
+spring.datasource.password=3edc#EDC
+
+mybatis.type-aliases-package=com.jing.study.entity

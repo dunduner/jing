@@ -1,0 +1,66 @@
+spring.application.name=jing
+# 应用服务 WEB 访问端口
+server.port=8080
+server.tomcat.uri-encoding=UTF-8
+
+#项目访问名称，如果不配置直接访问bean就可以
+#server.servlet.context-path=/jing
+#Spring boot视图配置
+spring.mvc.view.prefix=/WEB-INF/jsp/
+spring.mvc.view.suffix=.jsp
+#静态文件访问配置
+spring.mvc.static-path-pattern=/static/**
+#实体类包
+mybatis.type-aliases-package=com.jing.study.entity
+
+
+#----开始sharding-jdbc
+#shardingsphere控制台打印sql
+spring.shardingsphere.props.sql.show=true
+spring.main.allow-bean-definition-overriding=true
+#数据源 先创建3个数据库
+spring.shardingsphere.datasource.names=test2019,test2020,test2021
+
+# 配置test2019
+spring.shardingsphere.datasource.test2019.type=com.zaxxer.hikari.HikariDataSource
+spring.shardingsphere.datasource.test2019.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.shardingsphere.datasource.test2019.jdbc-url=jdbc:mysql://49.235.166.226:3521/test2019?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+spring.shardingsphere.datasource.test2019.username=root
+spring.shardingsphere.datasource.test2019.password=3edc#EDC
+
+# 配置test2020
+spring.shardingsphere.datasource.test2020.type=com.zaxxer.hikari.HikariDataSource
+spring.shardingsphere.datasource.test2020.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.shardingsphere.datasource.test2020.jdbc-url=jdbc:mysql://49.235.166.226:3521/test2020?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+spring.shardingsphere.datasource.test2020.username=root
+spring.shardingsphere.datasource.test2020.password=3edc#EDC
+
+# 配置test2020
+spring.shardingsphere.datasource.test2021.type=com.zaxxer.hikari.HikariDataSource
+spring.shardingsphere.datasource.test2021.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.shardingsphere.datasource.test2021.jdbc-url=jdbc:mysql://49.235.166.226:3521/test2021?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+spring.shardingsphere.datasource.test2021.username=root
+spring.shardingsphere.datasource.test2021.password=3edc#EDC
+
+
+
+
+# 配置进行分库的字段
+spring.shardingsphere.sharding.default-database-strategy.standard.sharding-column=create_time
+
+# 具体的配置规则我们会在自定义类中指定，也就是这个PreciseModuloDatabaseShardingAlgorithm类，这写自定义类路径
+spring.shardingsphere.sharbigit branchnding-tablesding.default-database-strategy.standard.precise-algorithm-class-name=com.jing.study.util.PreciseModuloDatabaseShardingAlgorithm
+spring.shardingsphere.sharding.default-database-strategy.standard.range-algorithm-class-name=
+
+# 配置库与表结合，就是你有几个库，几个表，例如：我有master04091和mater04092这2个库，每个库下有五张表，tab_user0......tab_user4，并且指定了逻辑库为master0409，逻辑表为tab_user
+spring.shardingsphere.sharding.tables.tab_user.actual-data-nodes=test$->{2019..2021}.tab_user$->{1..12}
+
+# 配置进行分表的字段
+spring.shardingsphere.sharding.default-table-strategy.standard.sharding-column=create_time
+
+# 具体的配置规则我们会在自定义类中指定，也就是这个PreciseModuloTableShardingAlgorithm类，这写自定义类路径
+spring.shardingsphere.sharding.default-table-strategy.standard.precise-algorithm-class-name=com.jing.study.util.PreciseModuloTableShardingAlgorithm
+spring.shardingsphere.sharding.default-table-strategy.standard.range-algorithm-class-name=
+
+
+
