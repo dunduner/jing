@@ -1,6 +1,5 @@
-package com.jing.study.controller;
+package com.jing.study.job;
 
-import com.jing.study.job.TestJob;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

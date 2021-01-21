@@ -31,6 +31,7 @@ public class aspect {
      * 操作版本号
      * <p>
      * 项目启动时从命令行传入，例如：java -jar xxx.war --version=201902
+     *  -D"你想配置的参数名"="参数值"
      * </p>
      */
     @Value("${version}")
@@ -61,10 +62,9 @@ public class aspect {
         // 获取RequestAttributes
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
 //         从获取RequestAttributes中获取HttpServletRequest的信息
-        HttpServletRequest request = (HttpServletRequest) requestAttributes
-                .resolveReference(RequestAttributes.REFERENCE_REQUEST);
+        HttpServletRequest request = (HttpServletRequest) requestAttributes.resolveReference(RequestAttributes.REFERENCE_REQUEST);
 
-        System.out.println("operVersion:" + operVersion);
+        System.out.println("============operVersion------->>>>>>>>>>>>>:" + operVersion);
         // 从切面织入点处通过反射机制获取织入点处的方法
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         // 获取切入点所在的方法

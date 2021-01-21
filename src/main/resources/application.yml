@@ -1,72 +1,69 @@
 #3年12月
-apollo:
-  bootstrap:
-    enabled: true
-    eagerLoad:
-      enabled: true
-    namespaces: application,common-tony
-  cluster: PRO
-
-hello: ${hw}
-#server:
-#  port: 8080
-#  tomcat:
-#    uri-encoding: UTF-8
-#  #项目访问名称，如果不配置直接访问bean就可以
-##  servlet:
-##    context-path: /jing
-#mybatis:
-#  type-aliases-package: com.jing.study.entity
+#apollo:
+#  bootstrap:
+#    enabled: true
+#    eagerLoad:
+#      enabled: true
+#    namespaces: application,common-tony
+#  cluster: PRO
 #
-#spring:
-#  application:
-#    name: jing
-#  mvc:
-#    view:
-#      prefix: /WEB-INF/jsp/
-#      suffix: .jsp
-#    static-path-pattern: /static/**
-#  main:
-#    allow-bean-definition-overriding: true
-#  #----开始sharding-jdbc
-#  shardingsphere:
-#    props:
-#      sql:
-#        show: true # 是否显示SQL
-#        executor:
-#          size: 4 # 工作线程数量，默认值: CPU核数
-#    datasource:
-#      names: testmaster,test2019,test2020,test2021
-#      testmaster:
-#        type: com.zaxxer.hikari.HikariDataSource # 数据库连接池类名称
-#        driver-class-name: com.mysql.cj.jdbc.Driver
-#        jdbc-url: jdbc:mysql://49.235.166.226:3521/testmaster?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false  # 数据库url连接
-#        username: root # 数据库用户名
-#        password: 3edc#EDC  # 数据库密码
-#      test2019:
-#        type: com.zaxxer.hikari.HikariDataSource # 数据库连接池类名称
-#        driver-class-name: com.mysql.cj.jdbc.Driver # 数据库驱动类名
-#        jdbc-url: jdbc:mysql://49.235.166.226:3521/test2019?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false  # 数据库url连接
-#        username: root # 数据库用户名
-#        password: 3edc#EDC  # 数据库密码
-#      test2020:
-#        type: com.zaxxer.hikari.HikariDataSource # 数据库连接池类名称
-#        driver-class-name: com.mysql.cj.jdbc.Driver # 数据库驱动类名
-#        jdbc-url: jdbc:mysql://49.235.166.226:3521/test2020?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false  # 数据库url连接
-#        username: root # 数据库用户名
-#        password: 3edc#EDC  # 数据库密码
-#      test2021:
-#        type: com.zaxxer.hikari.HikariDataSource # 数据库连接池类名称
-#        driver-class-name: com.mysql.cj.jdbc.Driver # 数据库驱动类名
-#        jdbc-url: jdbc:mysql://49.235.166.226:3521/test2021?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false  # 数据库url连接
-#        username: root # 数据库用户名
-#        password: 3edc#EDC  # 数据库密码
+hello: helloWorld
+stu_name: zhangsan
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8
+  #项目访问名称，如果不配置直接访问bean就可以
+#  servlet:
+#    context-path: /jing
+mybatis:
+  type-aliases-package: com.jing.study.entity
 
+spring:
+  application:
+    name: jing
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+    static-path-pattern: /static/**
+  main:
+    allow-bean-definition-overriding: true
+  #----开始sharding-jdbc
+  shardingsphere:
+    props:
+      sql:
+        show: true # 是否显示SQL
+        executor:
+          size: 4 # 工作线程数量，默认值: CPU核数
+    datasource:
+      names: testmaster,test2019,test2020,test2021
+      testmaster:
+        type: com.zaxxer.hikari.HikariDataSource # 数据库连接池类名称
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://49.235.166.226:3521/testmaster?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false  # 数据库url连接
+        username: zhangning # 数据库用户名
+        password: 123456    # 数据库密码
+      test2019:
+        type: com.zaxxer.hikari.HikariDataSource # 数据库连接池类名称
+        driver-class-name: com.mysql.cj.jdbc.Driver # 数据库驱动类名
+        jdbc-url: jdbc:mysql://49.235.166.226:3521/test2019?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false  # 数据库url连接
+        username: zhangning # 数据库用户名
+        password: 123456    # 数据库密码
+      test2020:
+        type: com.zaxxer.hikari.HikariDataSource # 数据库连接池类名称
+        driver-class-name: com.mysql.cj.jdbc.Driver # 数据库驱动类名
+        jdbc-url: jdbc:mysql://49.235.166.226:3521/test2020?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false  # 数据库url连接
+        username: zhangning # 数据库用户名
+        password: 123456    # 数据库密码
+      test2021:
+        type: com.zaxxer.hikari.HikariDataSource # 数据库连接池类名称
+        driver-class-name: com.mysql.cj.jdbc.Driver # 数据库驱动类名
+        jdbc-url: jdbc:mysql://49.235.166.226:3521/test2021?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false  # 数据库url连接
+        username: zhangning # 数据库用户名
+        password: 123456    # 数据库密码
 
-
-
-
-
+# 采用bean的形式注入数据源了
 #    sharding:
 #      #分库策略 4选一
 #      default-database-strategy:

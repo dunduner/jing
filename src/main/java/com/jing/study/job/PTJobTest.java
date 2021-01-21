@@ -19,7 +19,7 @@ public class PTJobTest {
     //10秒后 一分钟一次
     @Scheduled(cron = "10/59 * * * * ?")
     public void sendMsg1930() {
-        System.out.println(this.getClass().getName()+"执行时间:"+new Date().toString());
+        System.out.println("10秒后 一分钟一次："+this.getClass().getName()+"，执行时间:"+new Date().toString());
     }
 }
 

@@ -24,6 +24,13 @@
     </properties>
 
     <dependencies>
+        <!--rocketMq的依赖-->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>4.3.0</version>
+        </dependency>
+
         <!--aop切面-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

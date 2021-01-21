@@ -9,9 +9,8 @@ public class MaoPao {
 
     public static void main(String[] args) {
 
-        int[] nums = new int[]{10, 3, 1, 5};
-//        int[] nums = new int[]{10,1,3,5,6,22,7,5,9,11,22};
-        int temp = 0;
+        int[] nums = new int[]{7,10,1,3,5,6,82,7,5,9,11,22};
+        int temp;
         int size = nums.length - 1;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size - i; j++) {

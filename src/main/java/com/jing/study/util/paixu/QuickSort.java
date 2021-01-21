@@ -6,13 +6,15 @@ package com.jing.study.util.paixu;
  */
 public class QuickSort {
     public static void quickSort(int[] arr, int begin, int end) {
-        int i, j, temp, save_jiaohuan;
+        int i, j,
+                temp, //temp就是基准位
+                save_jiaohuan;
         if (begin > end) {
             return;
         }
         i = begin;
         j = end;
-        //temp就是基准位
+
         temp = arr[begin];
         while (i < j) {
             //先看右边，依次往左递减,找到小于基数的
@@ -40,7 +42,7 @@ public class QuickSort {
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[]{22, 7, 88, 9, 99, 1, 2, 3, 6};
+        int[] arr = new int[]{22, 7, 88, 9, 99, 1, 7, 2, 3, 6};
         quickSort(arr, 0, arr.length - 1);
         for (int i = 0; i < arr.length; i++) {
             System.out.println(arr[i]);

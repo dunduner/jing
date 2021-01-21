@@ -30,8 +30,8 @@ public class OACenterShardingTableAlgorithm implements PreciseShardingAlgorithm<
         String tableName = availableTargetNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY)[index];
         //按月路由
         for (String each : availableTargetNames) {
-            System.out.println("++++++++++++");
-            System.out.println(each);
+//            System.out.println("++++++++++++");
+//            System.out.println(each);
             //1 2 3 4 5..12
             if (each.endsWith(String.valueOf(index))) {
                 //这里返回回去的就是最终需要查询的表名

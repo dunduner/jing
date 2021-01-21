@@ -28,7 +28,7 @@ public class TestController {
 
 
     public static void main(String[] args) {
-        String loginName = "wangheng";
+        String loginName = "张海宁20201231";
         int hashCode = loginName.hashCode();
         int abs = Math.abs(hashCode % 10);
         System.out.println(abs);

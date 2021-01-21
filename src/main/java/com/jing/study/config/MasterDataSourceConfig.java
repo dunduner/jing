@@ -76,7 +76,7 @@ public class MasterDataSourceConfig {
         ShardingRuleConfiguration shardingRuleConfig = new ShardingRuleConfiguration();
         shardingRuleConfig.getTableRuleConfigs().add(getOrderTableRuleConfigurationMaster());//添加表.库的 路由规则
         shardingRuleConfig.getBindingTableGroups().add("tab_user");//表前缀
-        //数据库分库逻辑
+        //数据库data 分片逻辑
         shardingRuleConfig.setDefaultDatabaseShardingStrategyConfig(new StandardShardingStrategyConfiguration("create_time", new SecondDatabaseStrategy(), new SecondDatabaseRangeStrategy()));
         //表逻辑  标准分片 可以传2个参数   ---参数 分表算法实体类
         shardingRuleConfig.setDefaultTableShardingStrategyConfig(new StandardShardingStrategyConfiguration("name", new OACenterShardingTableAlgorithm(), new SecondTableRangeStrategy()));

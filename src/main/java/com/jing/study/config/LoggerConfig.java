@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.logging.LogLevel;
 import org.springframework.boot.logging.LoggingSystem;
-import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 import java.util.Set;
@@ -21,7 +20,7 @@ import java.util.Set;
  * @date 2020/10/31
  * 阿波罗的监听
  */
-@Configuration
+//@Configuration//取消了
 public class LoggerConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(LoggerConfig.class);

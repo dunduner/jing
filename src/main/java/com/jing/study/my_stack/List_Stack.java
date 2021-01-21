@@ -37,7 +37,6 @@ public class List_Stack<E> implements Stack<E> {
     }
 
     private boolean isFull() {
-
         if (deep == index + 1) {
             return true;
         } else {
@@ -56,7 +55,6 @@ public class List_Stack<E> implements Stack<E> {
         Object o = data[index];
         data[index] = null;
         index--;
-
         return (E) o;
     }
 
@@ -96,6 +94,7 @@ public class List_Stack<E> implements Stack<E> {
         stringList_stack.push("a4");
         stringList_stack.push("a5");
         stringList_stack.push("a6");
+        stringList_stack.push("a777");
 
 //        stringList_stack.print();
         String pop = stringList_stack.pop();

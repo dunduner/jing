@@ -33,8 +33,8 @@ public class PreciseModuloTableShardingAlgorithm implements PreciseShardingAlgor
             if(month<10){
                 value = StringUtils.substring(value,1);
             }
-            System.out.println("timeValue:"+timeValue);
-            System.out.println("value:"+value);
+            System.out.println("时间是：:"+timeValue);
+            System.out.println("月份是:"+value);
             //按月路由
             for (String each : tables) {
                 System.out.println("表的each是："+each);

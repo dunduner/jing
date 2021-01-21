@@ -76,6 +76,7 @@ public class Link_Stack<E> implements Stack<E> {
         linkStack.push("a4");
         linkStack.push("a5");
         linkStack.push("a6");
+        linkStack.push("a777");
 
 //        linkStack.print();
         String pop = linkStack.pop();
