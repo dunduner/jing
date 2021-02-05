@@ -1,5 +1,6 @@
 package com.jing.study.dao;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.jing.study.entity.User;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -12,7 +13,7 @@ import java.util.List;
  */
 @Repository("UserMapper")
 @Mapper
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<User> {
     /**
      * 添加，只需向逻辑表中添加即可，
      * 此处tab_user不含有数字 0 1 2 3 4

@@ -6,13 +6,16 @@ import com.alibaba.excel.read.metadata.ReadSheet;
 import com.jing.study.entity.DemoData;
 import com.jing.study.excel.DemoDataListener;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
-public class StudyApplicationTests {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class ExcelApplicationTests {
 
     @Test
     public void contextLoads() {
