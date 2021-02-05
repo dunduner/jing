@@ -2,7 +2,7 @@ package com.jing.study.sharding.rang;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Range;
-import com.jing.study.util.MonthQueryUtil;
+import com.jing.study.util.DateUtilByDateTimeFormatter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shardingsphere.api.sharding.standard.RangeShardingAlgorithm;
 import org.apache.shardingsphere.api.sharding.standard.RangeShardingValue;
@@ -33,10 +33,7 @@ public class SecondTableRangeStrategy implements RangeShardingAlgorithm<String> 
 //        String lowerValue = StringUtils.substring(lowerEndpoint, 5, 7); //获取到月份 01 07  09 11 12等
 //        String upperValue = StringUtils.substring(upperEndpoint, 5, 7); //获取到月份 01 07  09 11 12等
         //拿到所有要查询的年月
-        MonthQueryUtil monthQueryUtil = new MonthQueryUtil();
-
-        ArrayList<String> yearAndMonthList = monthQueryUtil.getYearAndMonthList(lowerEndpoint, upperEndpoint);
-
+        ArrayList<String> yearAndMonthList = DateUtilByDateTimeFormatter.getYearAndMonthList(lowerEndpoint, upperEndpoint);
         for (String tableseach : rangeList) {
             //此处的8  是根据表名长度决定的
             String substringMonth = StringUtils.substring(tableseach, 8);//获取到月份

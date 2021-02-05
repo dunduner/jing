@@ -3,6 +3,7 @@ package com.jing.study.util.paixu;
 /**
  * @author zhangning
  * @date 2020/10/14
+ * 快速排序
  */
 public class QuickSort {
     public static void quickSort(int[] arr, int begin, int end) {

@@ -1,14 +1,13 @@
 package com.jing.study.util;
 
-
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * @author ning11.zhang
@@ -52,6 +51,10 @@ public class DateUtilByDateTimeFormatter {
      * 年月日时分秒，格式：yyyy-MM-dd HH:mm:ss
      */
     private final static DateTimeFormatter DATE = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    private final static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+    private final static String YYYY_MM_DD = "yyyy-MM-dd";
+    private final static String YYYY_MM = "yyyy-MM";
 
     /**
      * 获取系统当前年份，YYYY格式
@@ -406,21 +409,79 @@ public class DateUtilByDateTimeFormatter {
     }
 
     /**
-     * 传入时间字符串-和匹配格式转为对应的Date
+     * 日期/时间转时间戳
      *
-     * @param time   2020-01-01 11:11:11
-     * @param format yyyy-MM-dd HH:mm:ss
+     * @param date    时间
+     * @param pattern 时间格式
+     * @return 时间戳
+     */
+    public static long date2TimeStamp(Date date, String pattern) {
+        long timeStamp;
+        if (Objects.isNull(pattern)) pattern = YYYY_MM_DD_HH_MM_SS;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        LocalDateTime localDateTime = date.toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
+        timeStamp = localDateTime.toInstant(ZoneOffset.ofHours(8)).toEpochMilli();
+        return timeStamp;
+    }
+
+    /**
+     * 时间戳转日期/时间
+     *
+     * @param seconds 时间戳
+     * @param pattern 时间格式
+     * @return 格式化的时间
+     */
+    public static String timeStamp2Date(long seconds, String pattern) {
+        String time = "暂无数据";
+        if (Objects.isNull(pattern)) pattern = YYYY_MM_DD_HH_MM_SS;
+        LocalDateTime dateTime = LocalDateTime.ofEpochSecond(seconds / 1000L, 0, ZoneOffset.ofHours(8));
+        if (seconds != 0) time = dateTime.format(DateTimeFormatter.ofPattern(pattern));
+        return time;
+    }
+    /**
+     * 作者张宁
+     *
+     * @param dateString
+     * @param format     只有YYYY_MM_DD_HH_MM_SS或者YYYY_MM_DD
      * @return
      */
-    public static Date timeStrToDate(String time, String format) {
-        Date date1 = null;
-        SimpleDateFormat sdf = new SimpleDateFormat(format);
-        try {
-            date1 = sdf.parse(time);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static Date dateTimeStringToDate(String dateString, String format) {
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern(format);
+        Date toDate = null;
+        if (YYYY_MM_DD_HH_MM_SS.equals(format)) {
+            LocalDateTime time = LocalDateTime.parse(dateString, fmt);
+            toDate = DateUtilByDateTimeFormatter.localDateTime2Date(time);
+        } else if (YYYY_MM_DD.equals(format)) {
+            LocalDate localDate = LocalDate.parse(dateString, fmt);
+            toDate = DateUtilByDateTimeFormatter.localDate2Date(localDate);
         }
-        return date1;
+        return toDate;
+    }
+
+    /**
+     * LocalDate转Date
+     *
+     * @param localDate
+     * @return
+     */
+    public static Date localDate2Date(LocalDate localDate) {
+        if (null == localDate) {
+            return null;
+        }
+        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    /**
+     * LocalDateTime转Date
+     *
+     * @param localDateTime
+     * @return
+     */
+    public static Date localDateTime2Date(LocalDateTime localDateTime) {
+        if (null == localDateTime) {
+            return null;
+        }
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 
     /**
@@ -568,6 +629,33 @@ public class DateUtilByDateTimeFormatter {
         return getDateTimeFormatter(date, "E");
     }
 
+    /**
+     * 给出年月的起点和重点，拿到所有年月的集合
+     *
+     * @param begin
+     * @param end
+     * @return
+     */
+    public static ArrayList<String> getYearAndMonthList(String begin, String end) {
+        ArrayList<String> getYearAndMonthList = new ArrayList<>();
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat(YYYY_MM);
+            Date d1 = new SimpleDateFormat(YYYY_MM).parse(begin);//定义起始日期
+            Date d2 = new SimpleDateFormat(YYYY_MM).parse(end);//定义结束bai日期
+            Calendar dd = Calendar.getInstance();//定义日期实例
+            dd.setTime(d1);//设置日期起始时间
+            while (dd.getTime().before(d2)) {//判断是否到结束日期
+                String str = sdf.format(dd.getTime());
+                getYearAndMonthList.add(str);
+                dd.add(Calendar.MONTH, 1);//进行当前日期月份加1
+            }
+            getYearAndMonthList.add(sdf.format(d2.getTime()));
+        } catch (Exception e) {
+            System.out.println("异常" + e.getMessage());
+        }
+        return getYearAndMonthList;
+    }
+
     public static void main(String[] args) {
         System.out.println("年：" + DateUtilByDateTimeFormatter.getYear());
         System.out.println("月：" + DateUtilByDateTimeFormatter.getMonth());
@@ -579,14 +667,20 @@ public class DateUtilByDateTimeFormatter {
         System.out.println("年月日：" + DateUtilByDateTimeFormatter.getYearMonthDay2());
         System.out.println("年月日时分秒：" + DateUtilByDateTimeFormatter.getDate());
 
+        System.out.println("=============时间的转化==============");
         System.out.println("格式为yyyy-MM-dd的时间字符串转为秒，默认时区为东8区(10位):" + DateUtilByDateTimeFormatter.getSecond("2021-01-20"));
-        System.out.println("根据传入的int数字获取系统当前时间:" + DateUtilByDateTimeFormatter.getDateString(15));
+        System.out.println("根据传入的int数字获取各种格式的系统当前时间:" + DateUtilByDateTimeFormatter.getDateString(35));
         String str = System.currentTimeMillis() + "";
         System.out.println("时间戳转换为日期格式，根据传入的int数字获取确定要转换成的格式:" + DateUtilByDateTimeFormatter.getDateString(str, 15));
         System.out.println("把日期类型转换成字符串形式:" + DateUtilByDateTimeFormatter.getDateString(new Date(), 15));
         System.out.println("=============自定义时间的转化==============");
-        System.out.println("Date转字符串:" + DateUtilByDateTimeFormatter.getDateTimeFormatter(new Date(), "yyyy-MM-dd HH:mm:ss"));
-        System.out.println("时间字符串转Date：" + DateUtilByDateTimeFormatter.timeStrToDate("2020-01-01 11:11:11", "yyyy-MM-dd HH:mm:ss"));
+        System.out.println("Date转字符串:" + DateUtilByDateTimeFormatter.getDateTimeFormatter(new Date(), YYYY_MM_DD_HH_MM_SS));
+        System.out.println("时间字符串转Date：" + DateUtilByDateTimeFormatter.dateTimeStringToDate("2021-02-05 11:12:13", YYYY_MM_DD_HH_MM_SS));
+
+
+        System.out.println("任意日期/时间转时间戳:" + DateUtilByDateTimeFormatter.date2TimeStamp(new Date(), YYYY_MM_DD_HH_MM_SS));
+        System.out.println("13位时间戳转日期/时间:" + DateUtilByDateTimeFormatter.timeStamp2Date(1612515600000L, YYYY_MM_DD_HH_MM_SS));
+
         //时间的对比
         System.out.println("=============时间的对比==============");
         System.out.println("A>B：" + DateUtilByDateTimeFormatter.compareDate("2019-11-19", "2019-04-19"));
@@ -604,6 +698,9 @@ public class DateUtilByDateTimeFormatter {
         System.out.println("得到2天之后的日期和时间：" + DateUtilByDateTimeFormatter.getAfterDayDate(2));
         System.out.println("得到2天前的日期和时间：" + DateUtilByDateTimeFormatter.getAfterDayDate(-2));
         System.out.println("时间相减得到天数差：" + getDaySub("2021-01-01", "2021-01-15"));
+
+        ArrayList<String> yearAndMonthList = DateUtilByDateTimeFormatter.getYearAndMonthList("2019-11-11", "2020-03-22");
+        System.out.println("给出年月的起点和重点，拿到所有年月的集合:" + yearAndMonthList.toString());
     }
 
 }
