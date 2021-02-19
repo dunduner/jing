@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  *  异步消息  通常用在对响应时间敏感的业务场景，即发送端不能容忍长时间地等待Broker的响应。
  *  消息不在乎顺序性时候使用
  */
-public class AsyncProducer {
+public class B_AsyncProducer {
 
     public static void main(String[] args) throws Exception {
         // 实例化消息生产者Producer
@@ -53,7 +53,7 @@ public class AsyncProducer {
                 }
             });
         }
-        // 等待5s
+        // 等待5s   因为是异步的  需要等待下
         countDownLatch.await(5, TimeUnit.SECONDS);
         // 如果不再发送消息，关闭Producer实例。
         producer.shutdown();

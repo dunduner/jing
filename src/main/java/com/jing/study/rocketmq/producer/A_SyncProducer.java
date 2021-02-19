@@ -14,7 +14,7 @@ import org.apache.rocketmq.remoting.common.RemotingHelper;
  * 这种可靠性同步地发送方式使用的比较广泛，比如：重要的消息通知，短信通知。
  * 发送顺序是对的
  */
-public class SyncProducer {
+public class A_SyncProducer {
     public static void main(String[] args) throws Exception {
         // 实例化消息生产者Producer
         DefaultMQProducer producer = new DefaultMQProducer("zhangning_tongbu");

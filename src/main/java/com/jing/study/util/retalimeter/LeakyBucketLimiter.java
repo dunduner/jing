@@ -3,15 +3,12 @@ package com.jing.study.util.retalimeter;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
 /**
  * @author zhangning
  * @date 2020/10/27
  */
 public class LeakyBucketLimiter {
-
     private ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(5);
-
     // 桶的容量
     public int capacity = 10;
     // 当前水量
@@ -20,7 +17,6 @@ public class LeakyBucketLimiter {
     public int rate = 4;
     // 最后一次加水时间
     public long lastTime = System.currentTimeMillis();
-
     public void acquire() {
         scheduledExecutorService.scheduleWithFixedDelay(() -> {
             long now = System.currentTimeMillis();
@@ -39,11 +35,9 @@ public class LeakyBucketLimiter {
             }
         }, 0, 500, TimeUnit.MILLISECONDS);
     }
-
     public static void main(String[] args) {
         LeakyBucketLimiter limiter = new LeakyBucketLimiter();
         limiter.acquire();
     }
-
 }
 
